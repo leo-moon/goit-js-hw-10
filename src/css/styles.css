@@ -18,3 +18,17 @@ body {
   max-width: 320px;
   margin-bottom: 16px;
 }
+
+/* =============  short-card  =============== */
+ul {
+  list-style: none;
+}
+
+.flag {
+  width: 35px;
+  height: 100%;
+  vertical-align: middle;
+  margin: 0 10px;
+}
+
+/* =============  full-card  =============== */
