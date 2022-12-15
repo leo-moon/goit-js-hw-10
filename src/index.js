@@ -40,13 +40,7 @@ function countryCardOnScreen(country) {
 function countriesCardsChange (countries) {
   clearScreen();
   const countriesItems = countries.length;
-  if (countriesItems > 10) {
-    infoAlarm();
-    return
-  }
-  if (countriesItems > 1) {
-    refs.ul.innerHTML = shortCard(countries);
-    return
-  }
+  if (countriesItems > 10) { infoAlarm(); return }
+  if (countriesItems > 1)  { refs.ul.innerHTML = shortCard(countries); return }
   countryCardOnScreen(countries);
 }
