@@ -1,49 +1,32 @@
 import './css/styles.css';
 import debounce from 'lodash.debounce';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import  shortCard from './short-card';
+
+import { fetchCountries } from './fetchCountries';
+import  refs  from './variables';
+import shortCard from './short-card';
 import countryCard from './country-card';
 
 const DEBOUNCE_DELAY = 300;
 
-refs = {
-  input: document.querySelector('#search-box'),
-  ul   : document.querySelector('.country-list'),
-  div  : document.querySelector('.country-info')
-}
+refs.input = addEventListener('input', (debounce(mainF, DEBOUNCE_DELAY)));
 
-refs.input = addEventListener('input', (debounce(fetchCountries, DEBOUNCE_DELAY)));
-
-
-
-function fetchCountries(name) {
-  if (!name.target.value.length) {return};
-  const countryName = `https://restcountries.com/v3.1/name/${name.target.value.trim()}?name&capital&languages&population&flags`;
-  fetch(countryName)
+function mainF(name) {
+  controlTrim(name);
+  fetchCountries(name)
   .then(response => {
-    if (!response.ok) {
-      console.log('alarm');
-      return}
     return response.json();
   })
   .then(countries => {
-    clearScreen();
-    const countriesItems = countries.length;
-    console.log(countries.length, countries);
-    if (countriesItems > 10) {
-      infoAlarm();
-      return
-    }
-    if (countriesItems > 1) {
-      const make = shortCard(countries);
-      refs.ul.innerHTML = make;
-      return
-    }
-    countryCardOnScreen(countries);
+    countriesCardsChange(countries)
   })
   .catch(() => {
     failureAlarm();
     return});
+}
+
+function controlTrim(name){
+  if (!name.target.value.trim().length) {return};
 }
 
 function clearScreen() {
@@ -62,4 +45,18 @@ function failureAlarm () {
 function countryCardOnScreen(country) {
   const makeCard = countryCard(...country);
   refs.div.innerHTML = makeCard;
+}
+
+function countriesCardsChange (countries) {
+  clearScreen();
+  const countriesItems = countries.length;
+  if (countriesItems > 10) {
+    infoAlarm();
+    return
+  }
+  if (countriesItems > 1) {
+    refs.ul.innerHTML = shortCard(countries);
+    return
+  }
+  countryCardOnScreen(countries);
 }
