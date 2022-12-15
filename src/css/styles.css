@@ -32,3 +32,11 @@ ul {
 }
 
 /* =============  full-card  =============== */
+p {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+p .span {
+  font-weight: normal;
+}

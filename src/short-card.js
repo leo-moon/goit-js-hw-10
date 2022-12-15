@@ -1,3 +1,4 @@
+// export 
 function shortCard (countries) {
   // console.log('countries', countries);
   let li = '';
@@ -17,14 +18,3 @@ function shortCard (countries) {
 }
 
 export default shortCard;
-
-
-//   {{<#each name>}}
-// <li>
-//   <a src = {{ flags.png }} alt = 'flag'>
-//     {{!-- <h3>  --}}
-//       {{ name.official }} 
-//     {{!-- </h3> --}}
-//   </a>
-// </li>
-// {{</each>}}
