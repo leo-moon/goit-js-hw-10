@@ -12,21 +12,11 @@ const DEBOUNCE_DELAY = 300;
 refs.input = addEventListener('input', (debounce(mainF, DEBOUNCE_DELAY)));
 
 function mainF(name) {
-  controlTrim(name);
-  fetchCountries(name)
-  .then(response => {
-    return response.json();
-  })
-  .then(countries => {
-    countriesCardsChange(countries)
-  })
-  .catch(() => {
-    failureAlarm();
-    return});
-}
-
-function controlTrim(name){
   if (!name.target.value.trim().length) {return};
+  fetchCountries(name)
+    .then(response => { return response.json(); })
+    .then(countries => { countriesCardsChange(countries); })
+    .catch(() => { failureAlarm(); return});
 }
 
 function clearScreen() {
